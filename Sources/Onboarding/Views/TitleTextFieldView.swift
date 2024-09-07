@@ -1,3 +1,9 @@
+//
+//  TitleTextFieldView.swift
+//  Onboarding
+//
+//  Created by ilker on 7.09.2024.
+//
 import SwiftUI
 
 public struct TitleTextFieldView: View {
@@ -8,7 +14,6 @@ public struct TitleTextFieldView: View {
     let onTextChanged: ((String) -> Void)?
     
     @State private var text: String = ""
-    @State private var hapticCounter: Int = 0
     
     public var body: some View {
         ScrollView {
@@ -31,25 +36,32 @@ public struct TitleTextFieldView: View {
                     }
                 }
                 .layoutPriority(2)
-                .padding()
-                
-                VStack(spacing: 16) {
-                    TextField(placeholder, text: $text)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding()
-                        .background(theme.secondary.opacity(0.6))
-                        .cornerRadius(10)
-                        .foregroundColor(theme.text)
-                        .onChange(of: text) { newValue in
-                            hapticCounter += 1
-                            onTextChanged?(newValue)
-                        }
-                        .hapticFeedback(style: .success, trigger: $hapticCounter)
-                }
                 .padding(.horizontal)
+                .padding(.top)
+                
+                TextField(placeholder, text: $text, axis: .vertical)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .lineLimit(15, reservesSpace: true)
+                    .padding()
+                    .cornerRadius(10)
+                    .foregroundColor(theme.text)
+                    .onChange(of: text) { newValue in
+                        onTextChanged?(newValue)
+                    }
             }
             .background(theme.background)
         }
         .padding(.bottom, 10)
     }
+}
+
+#Preview {
+    TitleTextFieldView(
+        title: "Would You Like to Share More About Yourself?",
+        subtitle: "Tell us more to help us tailor your horoscope experience even better. Your insights will stay confidential.",
+        placeholder: "I am a aries",
+        theme: OnboardingColorTheme.defaultColorTheme,
+        onTextChanged: { _ in
+        
+    })
 }

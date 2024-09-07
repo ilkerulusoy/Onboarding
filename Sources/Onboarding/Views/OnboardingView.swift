@@ -42,8 +42,8 @@ struct OnboardingView: View {
                         theme: currentConfig.colorTheme,
                         onItemSelected: onItemSelected
                     )
-                case .progressTitleTextField(let title, let placeholder):
-                    progressTitleTextFieldView(title: title, placeholder: placeholder, theme: currentConfig.colorTheme)
+                case .progressTitleTextField(let title, let subtitle, let placeholder, let onTextChanged):
+                    TitleTextFieldView(title: title, subtitle: subtitle, placeholder: placeholder, theme: currentConfig.colorTheme, onTextChanged: onTextChanged )
                 case .progressTitleImageSubtitleCustomAction(let title, let image, let subtitle, let customAction):
                     progressTitleImageSubtitleCustomActionView(title: title, image: image, subtitle: subtitle, customAction: customAction, theme: currentConfig.colorTheme)
                 case .progressCustomView(let content):
@@ -82,19 +82,6 @@ struct OnboardingView: View {
         }
         .onDisappear {
             trackAnalytics(currentConfig.analyticsEventExit)
-        }
-    }
-    
-    @ViewBuilder
-    private func progressTitleTextFieldView(title: String, placeholder: String, theme: OnboardingColorTheme) -> some View {
-        VStack {
-            Text(title)
-                .font(.title)
-                .foregroundColor(theme.text)
-            TextField(placeholder, text: .constant(""))
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-                .foregroundColor(theme.text)
         }
     }
     
@@ -251,90 +238,137 @@ struct OnboardingView: View {
                 //               analyticsEventEnter: OnboardingAnalyticsEvent(name: "onboarding_welcome_enter", parameters: [:]),
                 //               analyticsEventExit: OnboardingAnalyticsEvent(name: "onboarding_welcome_exit", parameters: [:])
                 //        ),
+//                OnboardingPageConfiguration(
+//                    type:
+//                            .progressTitleSelectionList(
+//                                title: "Personalise your experience",
+//                                subtitle: "To provide you with accurate daily horoscopes, please select your zodiac sign. This will help us tailor the insights to your unique astrological profile.",
+//                                items: [
+//                                    OnboardingSelectionItem(
+//                                        title: "Aries",
+//                                        icon: Image(systemName: "flame"),
+//                                        subtitle: "(March 21 - April 19)"
+//                                    ),
+//                                    OnboardingSelectionItem(
+//                                        title: "Taurus",
+//                                        icon: Image(systemName: "circle.circle"),
+//                                        subtitle: "(April 20 - May 20)"
+//                                    ),
+//                                    OnboardingSelectionItem(
+//                                        title: "Gemini",
+//                                        icon: Image(systemName: "person.2"),
+//                                        subtitle: "(May 21 - June 20)"
+//                                    ),
+//                                    OnboardingSelectionItem(
+//                                        title: "Cancer",
+//                                        icon: Image(systemName: "moon"),
+//                                        subtitle: "(June 21 - July 22)"
+//                                    ),
+//                                    OnboardingSelectionItem(
+//                                        title: "Leo",
+//                                        icon: Image(systemName: "sun.max"),
+//                                        subtitle: "(July 23 - August 22)"
+//                                    ),
+//                                    OnboardingSelectionItem(
+//                                        title: "Virgo",
+//                                        icon: Image(systemName: "leaf"),
+//                                        subtitle: "(August 23 - September 22)"
+//                                    ),
+//                                    OnboardingSelectionItem(
+//                                        title: "Libra",
+//                                        icon: Image(systemName: "scale.3d"),
+//                                        subtitle: "(September 23 - October 22)"
+//                                    ),
+//                                    OnboardingSelectionItem(
+//                                        title: "Scorpio",
+//                                        icon: Image(systemName: "ant"),
+//                                        subtitle: "(October 23 - November 21)"
+//                                    ),
+//                                    OnboardingSelectionItem(
+//                                        title: "Sagittarius",
+//                                        icon: Image(systemName: "arrow.up.right"),
+//                                        subtitle: "(November 22 - December 21)"
+//                                    ),
+//                                    OnboardingSelectionItem(
+//                                        title: "Capricorn",
+//                                        icon: Image(systemName: "mountain.2"),
+//                                        subtitle: "(December 22 - January 19)"
+//                                    ),
+//                                    OnboardingSelectionItem(
+//                                        title: "Aquarius",
+//                                        icon: Image(systemName: "wind"),
+//                                        subtitle: "(January 20 - February 18)"
+//                                    ),
+//                                    OnboardingSelectionItem(
+//                                        title: "Pisces",
+//                                        icon: Image(systemName: "fish"),
+//                                        subtitle: "(February 19 - March 20)"
+//                                    )
+//                                ],
+//                                columnCount: 2,
+//                                onItemSelected: { item in
+//                                    
+//                                }),
+//                    progressValue: 0.25,
+//                    colorTheme: OnboardingColorTheme(
+//                       primary: Color(red: 0.11, green: 0.13, blue: 0.18),
+//                       secondary: Color(red: 0.67, green: 0.76, blue: 0.10),
+//                       background: Color(red: 0.96, green: 0.91, blue: 0.82),
+//                       text: .black
+//                    ),
+//                    isProgressEnable: true,
+//                    topRightButton: OnboardingButtonConfiguration(type: .skip, title: "Skip"),
+//                    bottomLeftButton: nil,
+//                    bottomRightButton: OnboardingButtonConfiguration(type: .next, title: "Next"),
+//                    analyticsEventEnter: OnboardingAnalyticsEvent(name: "onboarding_welcome_enter", parameters: [:]),
+//                    analyticsEventExit: OnboardingAnalyticsEvent(name: "onboarding_welcome_exit", parameters: [:])
+//                ),
                 OnboardingPageConfiguration(
                     type:
-                            .progressTitleSelectionList(
-                                title: "Personalise your experience",
-                                subtitle: "To provide you with accurate daily horoscopes, please select your zodiac sign. This will help us tailor the insights to your unique astrological profile.",
-                                items: [
-                                    OnboardingSelectionItem(
-                                        title: "Aries",
-                                        icon: Image(systemName: "flame"),
-                                        subtitle: "(March 21 - April 19)"
-                                    ),
-                                    OnboardingSelectionItem(
-                                        title: "Taurus",
-                                        icon: Image(systemName: "circle.circle"),
-                                        subtitle: "(April 20 - May 20)"
-                                    ),
-                                    OnboardingSelectionItem(
-                                        title: "Gemini",
-                                        icon: Image(systemName: "person.2"),
-                                        subtitle: "(May 21 - June 20)"
-                                    ),
-                                    OnboardingSelectionItem(
-                                        title: "Cancer",
-                                        icon: Image(systemName: "moon"),
-                                        subtitle: "(June 21 - July 22)"
-                                    ),
-                                    OnboardingSelectionItem(
-                                        title: "Leo",
-                                        icon: Image(systemName: "sun.max"),
-                                        subtitle: "(July 23 - August 22)"
-                                    ),
-                                    OnboardingSelectionItem(
-                                        title: "Virgo",
-                                        icon: Image(systemName: "leaf"),
-                                        subtitle: "(August 23 - September 22)"
-                                    ),
-                                    OnboardingSelectionItem(
-                                        title: "Libra",
-                                        icon: Image(systemName: "scale.3d"),
-                                        subtitle: "(September 23 - October 22)"
-                                    ),
-                                    OnboardingSelectionItem(
-                                        title: "Scorpio",
-                                        icon: Image(systemName: "ant"),
-                                        subtitle: "(October 23 - November 21)"
-                                    ),
-                                    OnboardingSelectionItem(
-                                        title: "Sagittarius",
-                                        icon: Image(systemName: "arrow.up.right"),
-                                        subtitle: "(November 22 - December 21)"
-                                    ),
-                                    OnboardingSelectionItem(
-                                        title: "Capricorn",
-                                        icon: Image(systemName: "mountain.2"),
-                                        subtitle: "(December 22 - January 19)"
-                                    ),
-                                    OnboardingSelectionItem(
-                                        title: "Aquarius",
-                                        icon: Image(systemName: "wind"),
-                                        subtitle: "(January 20 - February 18)"
-                                    ),
-                                    OnboardingSelectionItem(
-                                        title: "Pisces",
-                                        icon: Image(systemName: "fish"),
-                                        subtitle: "(February 19 - March 20)"
-                                    )
-                                ],
-                                columnCount: 2,
-                                onItemSelected: { item in
+                            .progressTitleTextField(
+                                title: "Would You Like to Share More About Yourself?",
+                                subtitle: "Tell us more to help us tailor your horoscope experience even better. Your insights will stay confidential.",
+                                placeholder: "I am a aries. I am alone.",
+                                onTextChanged: { text in
                                     
                                 }),
                     progressValue: 0.25,
                     colorTheme: OnboardingColorTheme(
-                       primary: Color(red: 0.11, green: 0.13, blue: 0.18),
-                       secondary: Color(red: 0.67, green: 0.76, blue: 0.10),
-                       background: Color(red: 0.96, green: 0.91, blue: 0.82),
-                       text: .black
+                        primary: Color(
+                            red: 0.11,
+                            green: 0.13,
+                            blue: 0.18
+                        ),
+                        secondary: Color(
+                            red: 0.67,
+                            green: 0.76,
+                            blue: 0.10
+                        ),
+                        background: Color(
+                            red: 0.96,
+                            green: 0.91,
+                            blue: 0.82
+                        ),
+                        text: .black
                     ),
                     isProgressEnable: true,
-                    topRightButton: OnboardingButtonConfiguration(type: .skip, title: "Skip"),
+                    topRightButton: OnboardingButtonConfiguration(
+                        type: .skip,
+                        title: "Skip"
+                    ),
                     bottomLeftButton: nil,
-                    bottomRightButton: OnboardingButtonConfiguration(type: .next, title: "Next"),
-                    analyticsEventEnter: OnboardingAnalyticsEvent(name: "onboarding_welcome_enter", parameters: [:]),
-                    analyticsEventExit: OnboardingAnalyticsEvent(name: "onboarding_welcome_exit", parameters: [:])
+                    bottomRightButton: OnboardingButtonConfiguration(
+                        type: .next,
+                        title: "Next"
+                    ),
+                    analyticsEventEnter: OnboardingAnalyticsEvent(
+                        name: "onboarding_welcome_enter",
+                        parameters: [:]
+                    ),
+                    analyticsEventExit: OnboardingAnalyticsEvent(
+                        name: "onboarding_welcome_exit",
+                        parameters: [:]
+                    )
                 ),
                 OnboardingPageConfiguration(
                     type: .progressCustomView {

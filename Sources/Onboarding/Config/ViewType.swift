@@ -22,7 +22,9 @@ public enum OnboardingViewType {
     )
     case progressTitleTextField(
         title: String,
-        placeholder: String
+        subtitle: String,
+        placeholder: String,
+        onTextChanged: ((String) -> Void)?
     )
     case progressTitleImageSubtitleCustomAction(
         title: String,
