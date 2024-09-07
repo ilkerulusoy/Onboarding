@@ -8,6 +8,7 @@ import SwiftUI
 
 // MARK: - Onboarding Container View
 public struct OnboardingContainerView: View {
+    
     @Binding var isOnboardingPresented: Bool
     let configuration: OnboardingConfiguration
     let openPaywall: () -> Void

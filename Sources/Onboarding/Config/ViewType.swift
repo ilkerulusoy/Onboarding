@@ -15,7 +15,10 @@ public enum OnboardingViewType {
     )
     case progressTitleSelectionList(
         title: String,
-        items: [OnboardingSelectionItem]
+        subtitle: String,
+        items: [OnboardingSelectionItem],
+        columnCount: Int,
+        onItemSelected: ((OnboardingSelectionItem) -> Void)?
     )
     case progressTitleTextField(
         title: String,
