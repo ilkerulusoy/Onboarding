@@ -4,9 +4,8 @@
 //
 //  Created by ilker on 6.09.2024.
 //
+import Foundation
 
-
-// MARK: - Onboarding Page Configuration
 public struct OnboardingPageConfiguration {
     public let type: OnboardingViewType
     public let progressValue: Float
