@@ -11,5 +11,6 @@ public enum OnboardingButtonType {
     case skip
     case next
     case openPaywall
+    case back
     case custom(action: () -> Void)
 }

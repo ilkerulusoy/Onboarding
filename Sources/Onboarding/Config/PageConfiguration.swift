@@ -11,9 +11,10 @@ public struct OnboardingPageConfiguration {
     public let type: OnboardingViewType
     public let progressValue: Float
     public let colorTheme: OnboardingColorTheme
-    public let topRightButton: OnboardingButtonConfiguration
-    public let bottomLeftButton: OnboardingButtonConfiguration
-    public let bottomRightButton: OnboardingButtonConfiguration
+    public let isProgressEnable: Bool
+    public let topRightButton: OnboardingButtonConfiguration?
+    public let bottomLeftButton: OnboardingButtonConfiguration?
+    public let bottomRightButton: OnboardingButtonConfiguration?
     public let analyticsEventEnter: OnboardingAnalyticsEvent
     public let analyticsEventExit: OnboardingAnalyticsEvent
 
@@ -21,15 +22,17 @@ public struct OnboardingPageConfiguration {
         type: OnboardingViewType,
         progressValue: Float,
         colorTheme: OnboardingColorTheme,
-        topRightButton: OnboardingButtonConfiguration,
-        bottomLeftButton: OnboardingButtonConfiguration,
-        bottomRightButton: OnboardingButtonConfiguration,
+        isProgressEnable: Bool,
+        topRightButton: OnboardingButtonConfiguration?,
+        bottomLeftButton: OnboardingButtonConfiguration?,
+        bottomRightButton: OnboardingButtonConfiguration?,
         analyticsEventEnter: OnboardingAnalyticsEvent,
         analyticsEventExit: OnboardingAnalyticsEvent
     ) {
         self.type = type
         self.progressValue = progressValue
         self.colorTheme = colorTheme
+        self.isProgressEnable = isProgressEnable
         self.topRightButton = topRightButton
         self.bottomLeftButton = bottomLeftButton
         self.bottomRightButton = bottomRightButton

@@ -13,4 +13,8 @@ public struct OnboardingConfiguration {
     public init(pages: [OnboardingPageConfiguration]) {
         self.pages = pages
     }
+    
+    var totalPages: Int {
+        pages.count
+    }
 }
