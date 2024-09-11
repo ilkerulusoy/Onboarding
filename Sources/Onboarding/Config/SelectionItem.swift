@@ -8,12 +8,20 @@ import SwiftUI
 
 // MARK: - Selection Item
 public struct OnboardingSelectionItem: Identifiable, Equatable {
-    public let id = UUID()
+    public let id: String
     public let title: String
     public let icon: Image
     public let subtitle: String
     
     public init(title: String, icon: Image, subtitle: String) {
+        self.id = UUID().uuidString
+        self.title = title
+        self.icon = icon
+        self.subtitle = subtitle
+    }
+    
+    public init(id: String, title: String, icon: Image, subtitle: String) {
+        self.id = id
         self.title = title
         self.icon = icon
         self.subtitle = subtitle
