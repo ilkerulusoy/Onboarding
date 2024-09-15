@@ -20,8 +20,8 @@ let package = Package(
         
     ],
     dependencies: [
-//        .package(url:"https://github.com/ilkerulusoy/Extensions", branch: "main"),
-        .package(path: "../Extensions")
+        .package(url:"https://github.com/ilkerulusoy/Extensions", branch: "main"),
+//        .package(path: "../Extensions")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
